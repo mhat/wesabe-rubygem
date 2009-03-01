@@ -10,6 +10,7 @@ require 'hpricot'
 require 'net/https'
 require 'yaml'
 require 'time'
+require 'chronic'
 
 # Provides an object-oriented interface to the Wesabe API.
 class Wesabe
@@ -96,7 +97,15 @@ class Wesabe
   def targets
     @targets ||= load_targets
   end
-
+  
+  # Fetchs all the user's txactions within the provided range. This does not
+  # current cache the result set so be careful! if dates aren't provided it
+  # will default to txactions for the last thirty days.
+  # 
+  def txactions_for (sdate, edate)
+    return load_txactions(sdate, edate)
+  end
+  
   # Executes a request via POST with the initial username and password.
   #
   # @see Wesabe::Request::execute
@@ -142,11 +151,23 @@ class Wesabe
   end
 
   def process_targets(xml)
-    associate((xml / :targets / :target).map do |element|
+    wesabe.associate((xml / :targets / :target).map do |element|
       Target.from_xml(element)
     end)
   end
-
+  
+  def load_txactions (sdate, edate)
+    ds          = Wesabe::DataSource::Txactions.new
+    ds.wesabe   = self
+    ds.sdate    = sdate
+    ds.edate    = edate
+    ds.accounts = accounts
+    ds.load
+    
+    return ds.txactions
+  end
+  
+  
   def associate(what)
     Wesabe::Util.all_or_one(what) {|obj| obj.wesabe = self}
   end
@@ -162,3 +183,5 @@ require 'wesabe/currency'
 require 'wesabe/credential'
 require 'wesabe/job'
 require 'wesabe/target'
+require 'wesabe/txaction'
+require 'wesabe/data_source/txactions'
