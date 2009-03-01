@@ -23,6 +23,7 @@ SPEC = Gem::Specification.new do |s|
   s.homepage = HOMEPAGE
   s.rubyforge_project = PROJECT
   s.add_dependency("hpricot", ">= 0.6")
+  s.add_dependency("chronic", ">= 0.2.3")
     
   s.require_path = 'lib'
   # s.bindir = "bin"
