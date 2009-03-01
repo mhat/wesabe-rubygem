@@ -1,5 +1,5 @@
 Gem::Specification.new do |s|
-  s.name = %q{wesabe}
+  s.name = %q{wesabe-mhat}
   s.version = "0.0.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
@@ -21,11 +21,11 @@ Gem::Specification.new do |s|
     s.specification_version = 2
 
     if current_version >= 3 then
-      s.add_runtime_dependency(%q<hpricot>, ["= 0.6"])
+      s.add_runtime_dependency(%q<hpricot>, [">= 0.6.0"])
     else
-      s.add_dependency(%q<hpricot>, ["= 0.6"])
+      s.add_dependency(%q<hpricot>, [">= 0.6.0"])
     end
   else
-    s.add_dependency(%q<hpricot>, ["= 0.6"])
+    s.add_dependency(%q<hpricot>, [">= 0.6.0"])
   end
 end

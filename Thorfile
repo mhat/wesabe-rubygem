@@ -2,7 +2,7 @@ require 'rubygems'
 require 'rubygems/specification'
 require 'thor/tasks'
 
-GEM = "wesabe"
+GEM = "wesabe-mhat"
 GEM_VERSION = "0.0.2"
 AUTHOR = "Brian Donovan"
 EMAIL = "brian@wesabe.com"
@@ -22,7 +22,7 @@ SPEC = Gem::Specification.new do |s|
   s.email = EMAIL
   s.homepage = HOMEPAGE
   s.rubyforge_project = PROJECT
-  s.add_dependency("hpricot", "0.6")
+  s.add_dependency("hpricot", ">= 0.6")
     
   s.require_path = 'lib'
   # s.bindir = "bin"
