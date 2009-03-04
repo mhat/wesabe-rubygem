@@ -22,13 +22,10 @@ Gem::Specification.new do |s|
 
     if current_version >= 3 then
       s.add_runtime_dependency(%q<hpricot>, [">= 0.6"])
-      s.add_runtime_dependency(%q<chronic>, [">= 0.2.3"])
     else
       s.add_dependency(%q<hpricot>, [">= 0.6"])
-      s.add_dependency(%q<chronic>, [">= 0.2.3"])
     end
   else
     s.add_dependency(%q<hpricot>, [">= 0.6"])
-    s.add_dependency(%q<chronic>, [">= 0.2.3"])
   end
 end

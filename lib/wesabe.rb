@@ -10,7 +10,6 @@ require 'hpricot'
 require 'net/https'
 require 'yaml'
 require 'time'
-require 'chronic'
 
 # Provides an object-oriented interface to the Wesabe API.
 class Wesabe
@@ -151,11 +150,11 @@ class Wesabe
   end
 
   def process_targets(xml)
-    wesabe.associate((xml / :targets / :target).map do |element|
+    associate((xml / :targets / :target).map do |element|
       Target.from_xml(element)
     end)
   end
-  
+
   def load_txactions (sdate, edate)
     ds          = Wesabe::DataSource::Txactions.new
     ds.wesabe   = self
@@ -166,8 +165,7 @@ class Wesabe
     
     return ds.txactions
   end
-  
-  
+
   def associate(what)
     Wesabe::Util.all_or_one(what) {|obj| obj.wesabe = self}
   end
