@@ -34,6 +34,7 @@ class Wesabe::Txaction < Wesabe::BaseModel
   attr_accessor :merchant_name
   attr_accessor :raw_name
   attr_accessor :tags
+  attr_accessor :note
   
   
   # Initializes a +Wesabe::Txaction+ and yields itself.
@@ -47,15 +48,16 @@ class Wesabe::Txaction < Wesabe::BaseModel
   def self.from_xml(xml)
     new do |txn|
       txn.guid          = xml.at('guid').inner_text
+      txn.amount        = xml.at('amount').inner_text.to_f
+      txn.note          = xml.at('note') ? xml.at('note').inner_text : ''
       txn.date          = Date.parse xml.at('date').inner_text
       txn.original_date = Date.parse xml.at('original-date').inner_text
-      txn.amount        = xml.at('amount').inner_text.to_f
       txn.merchant_name = (xml/ "merchant/name").inner_text
       txn.tags          = (xml/ "tags/tag/name").map{ |element| element.inner_text }
     end
   end
   
   def inspect
-     inspect_these :guid, :date, :original_date, :amount, :merchant_name, :raw_name, :tags
+     inspect_these :guid, :date, :original_date, :amount, :merchant_name, :raw_name, :tags, :note
    end
 end
