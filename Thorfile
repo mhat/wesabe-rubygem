@@ -3,11 +3,11 @@ require 'rubygems/specification'
 require 'thor/tasks'
 
 GEM = "wesabe-mhat"
-GEM_VERSION = "0.0.2"
-AUTHOR = "Brian Donovan"
-EMAIL = "brian@wesabe.com"
+GEM_VERSION = "0.0.4"
+AUTHOR = "Matthew Knopp"
+EMAIL = "matt.knopp@gmail.com"
 HOMEPAGE = "https://www.wesabe.com/page/api"
-SUMMARY = "Wraps communication with the Wesabe API"
+SUMMARY = "mhat's fork of Wesabe-Rubygems"
 PROJECT = "wesabe"
 
 SPEC = Gem::Specification.new do |s|
