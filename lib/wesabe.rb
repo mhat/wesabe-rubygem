@@ -105,6 +105,13 @@ class Wesabe
     return load_txactions(sdate, edate)
   end
   
+  def tag_stats (txactions)
+    tag_stats = Wesabe::Stats::Tags.new
+    tag_stats.filter('transfer')
+    txactions.each { |txn| txn.tags.each { |tag| tag_stats.add tag, txn.amount } }
+    return tag_stats
+  end
+  
   # Executes a request via POST with the initial username and password.
   #
   # @see Wesabe::Request::execute
@@ -183,3 +190,4 @@ require 'wesabe/job'
 require 'wesabe/target'
 require 'wesabe/txaction'
 require 'wesabe/data_source/txactions'
+require 'wesabe/stats/tags'
