@@ -50,8 +50,8 @@ class Wesabe::Txaction < Wesabe::BaseModel
       txn.guid          = xml.at('guid').inner_text
       txn.amount        = xml.at('amount').inner_text.to_f
       txn.note          = xml.at('note') ? xml.at('note').inner_text : ''
-      txn.date          = Date.parse xml.at('date').inner_text
-      txn.original_date = Date.parse xml.at('original-date').inner_text
+      txn.date          = Time.parse xml.at('date').inner_text
+      txn.original_date = Time.parse xml.at('original-date').inner_text
       txn.merchant_name = (xml/ "merchant/name").inner_text
       txn.tags          = (xml/ "tags/tag/name").map{ |element| element.inner_text }
     end
