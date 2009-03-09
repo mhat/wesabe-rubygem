@@ -40,7 +40,7 @@ module Wesabe::Stats
     end
     
     def count
-      return @tags.size
+      return inject(0)   { |count,tag| count += tag.count }
     end
     
     def total
