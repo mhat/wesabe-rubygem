@@ -1,13 +1,21 @@
 module Wesabe::Stats
   class Tag
     attr_reader   :name
-    attr_accessor :total
-    attr_accessor :count
+    attr_reader   :container
+    attr_accessor :txactions
     
-    def initialize(name)
-      @name  = name
-      @total = 0.0
-      @count = 0
+    def initialize(name,container)
+      @name      = name
+      @container = container
+      @txactions = []
+    end
+    
+    def count 
+      return @txactions.size
+    end
+    
+    def total
+      return @txactions.inject(0.0) { |total, txn| total += txn.amount }
     end
   end
   
@@ -15,28 +23,33 @@ module Wesabe::Stats
     include Enumerable
     
     def initialize
-      @tags    = Hash.new
-      @filters = Hash.new
+      @tag_klass = Wesabe::Stats::Tag;
+      @tags      = Hash.new
+      @filters   = Hash.new
     end
     
     def filter(tag_name)
       @filters[tag_name] = true
     end
     
-    def add(tag_name, amount=0.0)
-      ## ignore filtered tags whole-sale, like they don't even exist!
-      return if @filters.has_key?(tag_name)
-      
-      tag = @tags.has_key?(tag_name) \
-        ? @tags[tag_name] \
-        : @tags[tag_name] = Wesabe::Stats::Tag.new(tag_name)
-      
-      tag.count += 1
-      tag.total += amount.to_f
+    def add (txaction)
+      txaction.tags.each do |tag_name|
+        
+        case @tags.has_key?(tag_name)
+          when true: tag = @tags[tag_name]
+          else       tag = @tags[tag_name] = @tag_klass.new(tag_name,self)
+        end
+        
+        tag.txactions << txaction
+      end
     end
     
     def each(&block)
-      @tags.each_value(&block)
+      @tags.each_value do |tag|
+        unless @filters.has_key? tag.name 
+          block.call(tag)
+        end
+      end
     end
     
     def count

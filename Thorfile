@@ -3,7 +3,7 @@ require 'rubygems/specification'
 require 'thor/tasks'
 
 GEM = "wesabe-mhat"
-GEM_VERSION = "0.0.4"
+GEM_VERSION = "0.0.5"
 AUTHOR = "Matthew Knopp"
 EMAIL = "matt.knopp@gmail.com"
 HOMEPAGE = "https://www.wesabe.com/page/api"
