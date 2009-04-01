@@ -5,7 +5,7 @@ module Wesabe::Stats
     attr_accessor :txactions
     
     def initialize(name,container)
-      @name      = name
+      @name      = name || 'untagged'
       @container = container
       @txactions = []
     end
@@ -46,9 +46,7 @@ module Wesabe::Stats
     
     def each(&block)
       @tags.each_value do |tag|
-        unless @filters.has_key? tag.name 
-          block.call(tag)
-        end
+        block.call(tag) unless @filters.has_key? tag.name 
       end
     end
     
