@@ -5,6 +5,8 @@ class Wesabe::Target < Wesabe::BaseModel
   attr_accessor :monthly_limit
   # This target's amount remaining ($)
   attr_accessor :amount_remaining
+  # This target's amount spent ($)
+  attr_accessor :amount_spent
 
   # Initializes a +Wesabe::Target+ and yields itself.
   #
@@ -24,12 +26,13 @@ class Wesabe::Target < Wesabe::BaseModel
   def self.from_xml(xml)
     new do |target|
       target.tag = xml.at("tag").at("name").inner_text
-      target.monthly_limit = xml.at("monthly-limit").inner_text.to_f
+      target.monthly_limit    = xml.at("monthly-limit").inner_text.to_f
       target.amount_remaining = xml.at("amount-remaining").inner_text.to_f
+      target.amount_spent     = xml.at("amount-spent").inner_text.to_f
     end
   end
 
   def inspect
-    inspect_these :tag, :monthly_limit, :amount_remaining
+    inspect_these :tag, :monthly_limit, :amount_remaining, :amount_spent
   end
 end
