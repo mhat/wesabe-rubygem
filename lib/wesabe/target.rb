@@ -7,7 +7,7 @@ class Wesabe::Target < Wesabe::BaseModel
   attr_accessor :amount_remaining
   # This target's amount spent ($)
   attr_accessor :amount_spent
-
+  
   # Initializes a +Wesabe::Target+ and yields itself.
   #
   # @yieldparam [Wesabe::Target] Target
@@ -15,7 +15,13 @@ class Wesabe::Target < Wesabe::BaseModel
   def initialize
     yield self if block_given?
   end
-
+  
+  # This targets monthly_limit minus amount_spent
+  #
+  def real_amount_remaining
+    return monthly_limit - amount_spent
+  end
+  
   # Returns a +Wesabe::Target+ generated from Wesabe's API XML.
   #
   # @param [Hpricot::Element] xml
