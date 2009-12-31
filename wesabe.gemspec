@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.description = %q{mhat's fork of Wesabe-Rubygems}
   s.email = ["matt.knopp@gmail.com", "brian@wesabe.com"]
   s.extra_rdoc_files = ["README.markdown", "LICENSE"]
-  s.files = ["LICENSE", "README.markdown", "Rakefile", "bin/console", "lib/cacert.pem", "lib/wesabe", "lib/wesabe/account.rb", "lib/wesabe/base_model.rb", "lib/wesabe/credential.rb", "lib/wesabe/currency.rb", "lib/wesabe/financial_institution.rb", "lib/wesabe/job.rb", "lib/wesabe/request.rb", "lib/wesabe/target.rb", "lib/wesabe/upload.rb", "lib/wesabe/util.rb", "lib/wesabe.rb"]
+  s.files = ["LICENSE", "README.markdown", "Rakefile", "bin/console", "lib/cacert.pem", "lib/wesabe", "lib/wesabe/account.rb", "lib/wesabe/base_model.rb", "lib/wesabe/credential.rb", "lib/wesabe/currency.rb", "lib/wesabe/data_source/txactions.rb", "lib/wesabe/financial_institution.rb", "lib/wesabe/job.rb", "lib/wesabe/request.rb", "lib/wesabe/stats/tags.rb", "lib/wesabe/target.rb", "lib/wesabe/txaction.rb", "lib/wesabe/upload.rb", "lib/wesabe/util.rb", "lib/wesabe.rb"]
   s.has_rdoc = true
   s.homepage = %q{https://www.wesabe.com/page/api}
   s.require_paths = ["lib"]
